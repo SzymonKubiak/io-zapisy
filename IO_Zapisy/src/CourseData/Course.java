@@ -1,6 +1,7 @@
 package CourseData;
 
 public class Course {
+	private static int idCounter = 0;
 	private int id;
 	private RoomDestination requiredRoom;
 	private String title;
@@ -36,6 +37,18 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Course(String [] data) {
+		
+		this.id = idCounter++;
+		this.requiredRoom = RoomDestination.valueOf(data[0]);
+		this.title = data[1];
+		this.description = data[2];
+	}
+	@Override
+	public String toString() {
+		return id + "\n" + title + "\n" + description + "\n" + requiredRoom + "\n";
 	}
 
 }
