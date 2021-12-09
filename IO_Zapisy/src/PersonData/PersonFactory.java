@@ -6,8 +6,13 @@ public class PersonFactory {
 	private List<Student> students;
 	private List<Teacher> teachers;
 
-	public boolean createStudent(String[] data) {
-		return false;
+	public Student createStudent(String[] data) {
+		
+		PersonalData personalData = new PersonalData(data);
+		Student student = new Student();
+		student.setPersonalData(personalData);
+		
+		return student;
 	}
 
 	public boolean createTeacher(String[] data) {
@@ -27,6 +32,10 @@ public class PersonFactory {
 	
 	public void deleteStudent(Student teacher) {
 		students.remove(teacher);
+	}
+	
+	public Teacher getTeacherById(int id) {
+		return teachers.get(id);
 	}
 
 }

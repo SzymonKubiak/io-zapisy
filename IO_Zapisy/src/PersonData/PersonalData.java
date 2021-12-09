@@ -64,5 +64,13 @@ public class PersonalData {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	public PersonalData(String [] data){
+		this.name = data[0];
+		this.surname = data[1];
+		this.PESEL = data[2];
+		this.address = data[3];
+		this.phoneNumber = data[4];
+		this.account = new Account();
+	}
 
 }

@@ -1,13 +1,17 @@
 package AppliicationInterface;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import CourseData.Classroom;
 import CourseData.Course;
 import CourseData.Enrollment;
+import CourseData.Group;
 import CourseData.GroupFactory;
 import PersonData.PersonFactory;
+import PersonData.Student;
+import PersonData.Teacher;
 
 public class Facade {
 private List<Enrollment> enrollments;
@@ -27,7 +31,15 @@ public Course findCourse(String name) {
 }
 
 public boolean createGroup(String [] data) {
-	return groupFactory.createGroup(data);
+	
+	Course course = courses.get(Integer.parseInt(data[0]));
+	Teacher teacher = personFactory.getTeacherById(Integer.parseInt(data[1]));
+	Classroom classroom = classrooms.get(Integer.parseInt(data[2]));
+	String date = data[3];
+	
+	Group group = groupFactory.createGroup(course, teacher, classroom, date);
+	
+	return group != null;
 }
 
 public List<Course> getCourses(){
@@ -40,5 +52,10 @@ public Facade() {
 	this.groupFactory = new GroupFactory();
 	this.personFactory = new PersonFactory();
 	
+}
+
+public Student createStudent(String [] data) {
+	
+	return personFactory.createStudent(data);
 }
 }

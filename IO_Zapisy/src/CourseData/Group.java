@@ -42,5 +42,9 @@ public class Group {
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
+	
+	public Group(String date) {
+		this.time = new Date(date);
+	}
 
 }
