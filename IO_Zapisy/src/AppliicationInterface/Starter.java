@@ -14,7 +14,7 @@ public class Starter {
 		facade.createCourse(courseData1);
 		List<Course> courses = facade.getCourses();
 		System.out.println(courses);
-
+		System.out.println("blah");
 	}
 
 }
