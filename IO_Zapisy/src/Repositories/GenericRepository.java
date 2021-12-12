@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import Entities.AbstractEntity;
 
-public class GenericRepository <EntityType extends AbstractEntity> {
+public abstract class GenericRepository <EntityType extends AbstractEntity> {
 
 	List<EntityType> list;
 	private int indexCount;

@@ -1,19 +1,18 @@
 package AppStart;
 
 import Entities.Account;
+import Repositories.AccountRepository;
 import Repositories.GenericRepository;
+import Repositories.RepositoryFactory;
 
 public class Starter {
 
 	public static void main(String[] args) {
 		
-		GenericRepository<Account> accountRepository = new GenericRepository<Account>();
-		Account a = new Account();
-		a.login = "szymon";
-		a.password = "kub";
-		accountRepository.create(a);
+		RepositoryFactory repositoryFactory = new RepositoryFactory();
 		
-		var b = accountRepository.getAll();
+		var repo = repositoryFactory.getRepository(AccountRepository.class);
+		
 	}
 
 }
