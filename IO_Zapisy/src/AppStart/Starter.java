@@ -22,11 +22,9 @@ public class Starter {
 	public static void main(String[] args) {
 		
 		RepositoryFactory repositoryFactory = RepositoryFactorySingleton.getInstance();
-		/*
-		Facade facade = new Facade(repositoryFactory);
-		facade.createStudent("alogin", "pass", "name", "sunameee", "34232522", "02.10.3999", "997777", "Kalisz");
+
+		DatabaseCreator.Seed();
 		
-		*/
 		StudentRepository sr = repositoryFactory.getRepository(StudentRepository.class);
 		Student student = sr.getById(1);
 		int a = student.id;

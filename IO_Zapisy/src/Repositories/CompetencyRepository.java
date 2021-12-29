@@ -3,17 +3,16 @@ package Repositories;
 import java.sql.ResultSet;
 
 import AppStart.DatabaseConnector;
-import Entities.AbstractEntity;
-import Entities.Enrollment;
+import Entities.Competency;
 
-public class EnrollmentRepository extends GenericRepository<Enrollment> {
+public class CompetencyRepository extends GenericRepository<Competency> {
 
-	public EnrollmentRepository() {
-		super("Enrollment");
+	public CompetencyRepository() {
+		super("Competency");
 	}
 
 	@Override
-	protected Enrollment resultToObject(ResultSet rs) {
+	protected Competency resultToObject(ResultSet rs) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -26,18 +25,17 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 
 	@Override
 	protected void createTable() {
-		DatabaseConnector.executeUpdate("DROP TABLE Enrollment;");
+		DatabaseConnector.executeUpdate("DROP TABLE Competency;");
 		StringBuilder sb = new StringBuilder()
-	            .append("CREATE TABLE IF NOT EXISTS Enrollment (")
+	            .append("CREATE TABLE IF NOT EXISTS Competency (")
 	            .append("id int,")
-	            .append("studentId int,")
-	            .append("groupId int")
+	            .append("teacherId int,")
+	            .append("name varchar(50)")
 	            .append(");");
 
 		String query = sb.toString();	
 		DatabaseConnector.executeUpdate(query);
 		
-
 	}
 
 }

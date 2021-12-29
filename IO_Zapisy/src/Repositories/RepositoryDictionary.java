@@ -8,6 +8,7 @@ public class RepositoryDictionary {
 	static List<DictionaryRecord> dictionary = Arrays.asList(
 			new DictionaryRecord("Account"),
 			new DictionaryRecord("Classroom"),
+			new DictionaryRecord("Competency"),
 			new DictionaryRecord("Course"),
 			new DictionaryRecord("Enrollment"),
 			new DictionaryRecord("Group"),

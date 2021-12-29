@@ -39,6 +39,7 @@ public class StudentRepository extends GenericRepository<Student> {
 
 	@Override
 	protected void createTable() {
+		DatabaseConnector.executeUpdate("DROP TABLE Student;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Student (")
 	            .append("id int,")

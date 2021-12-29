@@ -2,6 +2,7 @@ package Repositories;
 
 import java.sql.ResultSet;
 
+import AppStart.DatabaseConnector;
 import Entities.Teacher;
 
 public class TeacherRepository extends GenericRepository<Teacher> {
@@ -24,7 +25,16 @@ public class TeacherRepository extends GenericRepository<Teacher> {
 
 	@Override
 	protected void createTable() {
-		// TODO Auto-generated method stub
+		DatabaseConnector.executeUpdate("DROP TABLE Teacher;");
+		StringBuilder sb = new StringBuilder()
+	            .append("CREATE TABLE IF NOT EXISTS Teacher (")
+	            .append("id int,")
+	            .append("personalDataId int")
+	            .append(");");
+
+		String query = sb.toString();	
+		DatabaseConnector.executeUpdate(query);
+		
 		
 	}
 

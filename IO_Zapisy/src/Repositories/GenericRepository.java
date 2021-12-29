@@ -3,6 +3,8 @@ package Repositories;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +41,19 @@ public abstract class GenericRepository <EntityType extends AbstractEntity> {
 	}
 	
 	public List<EntityType> getAll() {
-		return this.list ;
+		List<EntityType> list = new ArrayList<EntityType>();
+		ResultSet rs = DatabaseConnector.executeQuery("SELECT * FROM " +tableName);
+		try {
+			while(rs.next()) {
+				EntityType e = resultToObject(rs);
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	public EntityType create(EntityType entity) {

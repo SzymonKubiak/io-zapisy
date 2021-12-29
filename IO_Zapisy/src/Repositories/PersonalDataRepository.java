@@ -1,9 +1,11 @@
 package Repositories;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import AppStart.DatabaseConnector;
 import Entities.AbstractEntity;
+import Entities.Account;
 import Entities.PersonalData;
 
 public class PersonalDataRepository extends GenericRepository<PersonalData> {
@@ -15,8 +17,24 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 
 	@Override
 	protected PersonalData resultToObject(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		PersonalData pd = null;
+		try {
+			if(!rs.next()) return null;
+			int id = rs.getInt("id");
+			int accountId = rs.getInt("accountId");
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			String pesel = rs.getString("pesel");
+			String address = rs.getString("address");
+			String phoneNumber = rs.getString("phoneNumber");
+			Account account = RepositoryFactorySingleton.getInstance().getRepository(AccountRepository.class).getById(accountId);
+			pd = new PersonalData(id, name, surname, pesel, address, phoneNumber, account);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pd;
 	}
 
 	@Override
@@ -27,6 +45,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 
 	@Override
 	protected void createTable() {
+		DatabaseConnector.executeUpdate("DROP TABLE PersonalData;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS PersonalData (")
 	            .append("id int,")
