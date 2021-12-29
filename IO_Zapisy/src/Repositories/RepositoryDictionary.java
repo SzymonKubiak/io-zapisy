@@ -6,7 +6,14 @@ import java.util.List;
 public class RepositoryDictionary {
 	
 	static List<DictionaryRecord> dictionary = Arrays.asList(
-			new DictionaryRecord("Account")
+			new DictionaryRecord("Account"),
+			new DictionaryRecord("Classroom"),
+			new DictionaryRecord("Course"),
+			new DictionaryRecord("Enrollment"),
+			new DictionaryRecord("Group"),
+			new DictionaryRecord("PersonalData"),
+			new DictionaryRecord("Student"),
+			new DictionaryRecord("Teacher")
 			);
 	
 }

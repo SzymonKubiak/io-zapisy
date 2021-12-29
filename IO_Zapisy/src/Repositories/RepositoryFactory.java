@@ -7,11 +7,13 @@ import java.util.List;
 
 import Entities.AbstractEntity;
 
+
 public class RepositoryFactory {
 	
 	List<GenericRepository<AbstractEntity>> repositories;
+	static RepositoryFactory rf;
 
-	public <Repository extends GenericRepository<AbstractEntity>, Entity> Repository getRepository(Class<Repository> repositoryClass) {
+	public <Repository extends GenericRepository> Repository getRepository(Class<Repository> repositoryClass) {
 		
 		String repositoryName = repositoryClass.getName();
 		int index = -1;
@@ -26,15 +28,18 @@ public class RepositoryFactory {
 	}
 	
 	
-	public RepositoryFactory() {
+	 RepositoryFactory() {
 		
-		this.repositories = new LinkedList<GenericRepository<AbstractEntity>>();
+		repositories = new LinkedList<GenericRepository<AbstractEntity>>();
 		
 		RepositoryDictionary.dictionary.forEach(dictionaryRecord -> {
 			try {
 				Class repositoryClass = Class.forName(dictionaryRecord.repositoryName);
 				Constructor<GenericRepository<AbstractEntity>> ctor = repositoryClass.getConstructor();
-				repositories.add((GenericRepository<AbstractEntity>)ctor.newInstance(null));
+				GenericRepository<AbstractEntity> repo = ctor.newInstance(null);
+				repo.createTable();
+				repositories.add(repo);
+				
 			} 
 			catch (ClassNotFoundException e) {
 
