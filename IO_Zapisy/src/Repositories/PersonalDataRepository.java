@@ -2,10 +2,12 @@ package Repositories;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import AppStart.DatabaseConnector;
 import Entities.AbstractEntity;
 import Entities.Account;
+import Entities.Competency;
 import Entities.PersonalData;
 
 public class PersonalDataRepository extends GenericRepository<PersonalData> {
@@ -20,7 +22,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 		PersonalData pd = null;
 		try {
 			if(!rs.next()) return null;
-			int id = rs.getInt("id");
+			final int id = rs.getInt("id");
 			int accountId = rs.getInt("accountId");
 			String name = rs.getString("name");
 			String surname = rs.getString("surname");
@@ -28,7 +30,9 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 			String address = rs.getString("address");
 			String phoneNumber = rs.getString("phoneNumber");
 			Account account = RepositoryFactorySingleton.getInstance().getRepository(AccountRepository.class).getById(accountId);
-			pd = new PersonalData(id, name, surname, pesel, address, phoneNumber, account);
+			List<Competency> list = RepositoryFactorySingleton.getInstance().getRepository(CompetencyRepository.class).getAll();
+			list = list.stream().filter(c-> c.teacherId == id).toList();
+			pd = new PersonalData(id, name, surname, pesel, address, phoneNumber, account, list);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
