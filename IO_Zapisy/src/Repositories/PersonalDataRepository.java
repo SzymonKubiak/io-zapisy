@@ -45,7 +45,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 
 	@Override
 	protected void createTable() {
-		DatabaseConnector.executeUpdate("DROP TABLE PersonalData;");
+		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS PersonalData;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS PersonalData (")
 	            .append("id int,")

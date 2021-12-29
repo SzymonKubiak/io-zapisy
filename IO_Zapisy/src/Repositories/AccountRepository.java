@@ -7,7 +7,6 @@ import AppStart.DatabaseConnector;
 import Entities.AbstractEntity;
 import Entities.Account;
 import Entities.PersonalData;
-import Entities.Student;
 
 public class AccountRepository extends GenericRepository<Account> {
 
@@ -41,7 +40,7 @@ public class AccountRepository extends GenericRepository<Account> {
 
 	@Override
 	protected void createTable() {
-		DatabaseConnector.executeUpdate("DROP TABLE Account;");
+		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Account;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Account (")
 	            .append("id int,")

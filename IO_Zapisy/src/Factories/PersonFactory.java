@@ -2,8 +2,6 @@ package Factories;
 
 import Entities.Account;
 import Entities.PersonalData;
-import Entities.Student;
-import Entities.Teacher;
 import Repositories.AccountRepository;
 import Repositories.RepositoryFactory;
 
@@ -11,19 +9,16 @@ public class PersonFactory {
 	
 	RepositoryFactory repositoryFactory;
 
-	public Student createStudent(PersonalData personalData) {
+	public PersonalData createStudent(PersonalData personalData) {
 		
-		AccountRepository accountRepo = repositoryFactory.getRepository(AccountRepository.class);
-		accountRepo.findByFieldValue("login", "Szymon");
-		
-		Student student = new Student(1, null);
-		return student;
+
+		return null;
 	}
 	
-	public Teacher createTeacher(PersonalData personalData) {
+	public PersonalData createTeacher(PersonalData personalData) {
 		
 		
-		Teacher teacher = null;
+		PersonalData teacher = null;
 		
 		return teacher;
 		

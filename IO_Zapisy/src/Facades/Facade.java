@@ -2,7 +2,6 @@ package Facades;
 
 import Entities.Account;
 import Entities.PersonalData;
-import Entities.Student;
 import Factories.PersonFactory;
 import Repositories.RepositoryFactory;
 
@@ -12,7 +11,7 @@ public class Facade {
 	PersonFactory personFactory;
 	
 
-	public Student createStudent(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address) {
+	public PersonalData createStudent(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address) {
 		
 		Account account = null;//new Account(login, password);
 		PersonalData pd = null;//new PersonalData(name, surname, PESEL, address, phoneNumber, account);

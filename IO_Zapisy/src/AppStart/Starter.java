@@ -9,13 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Entities.Account;
-import Entities.Student;
 import Facades.Facade;
 import Repositories.AccountRepository;
 import Repositories.GenericRepository;
 import Repositories.RepositoryFactory;
 import Repositories.RepositoryFactorySingleton;
-import Repositories.StudentRepository;
 
 public class Starter {
 
@@ -25,9 +23,6 @@ public class Starter {
 
 		DatabaseCreator.Seed();
 		
-		StudentRepository sr = repositoryFactory.getRepository(StudentRepository.class);
-		Student student = sr.getById(1);
-		int a = student.id;
 	}
 
 }

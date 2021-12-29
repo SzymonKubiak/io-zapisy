@@ -26,7 +26,7 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 
 	@Override
 	protected void createTable() {
-		DatabaseConnector.executeUpdate("DROP TABLE Enrollment;");
+		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Enrollment;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Enrollment (")
 	            .append("id int,")

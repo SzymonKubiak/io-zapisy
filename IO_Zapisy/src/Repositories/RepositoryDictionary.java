@@ -12,9 +12,7 @@ public class RepositoryDictionary {
 			new DictionaryRecord("Course"),
 			new DictionaryRecord("Enrollment"),
 			new DictionaryRecord("Group"),
-			new DictionaryRecord("PersonalData"),
-			new DictionaryRecord("Student"),
-			new DictionaryRecord("Teacher")
+			new DictionaryRecord("PersonalData")
 			);
 	
 }
