@@ -1,10 +1,13 @@
 package Repositories;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import AppStart.DatabaseConnector;
 import Entities.AbstractEntity;
+import Entities.Competency;
 import Entities.Course;
+import Enums.RoomDestination;
 
 public class CourseRepository extends GenericRepository<Course> {
 
@@ -14,8 +17,20 @@ public class CourseRepository extends GenericRepository<Course> {
 
 	@Override
 	protected Course resultToObject(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Course co = null;
+		try {
+			if(!rs.next()) return null;
+			int id = rs.getInt("id");
+			int requiredRoom = rs.getInt("requiredRoom");
+			String title = rs.getString("title");
+			String description = rs.getString("description");
+			co = new Course(id, RoomDestination.toEnum(requiredRoom), title, description);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return co;
 	}
 
 

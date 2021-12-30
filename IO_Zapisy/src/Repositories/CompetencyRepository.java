@@ -1,9 +1,12 @@
 package Repositories;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import AppStart.DatabaseConnector;
+import Entities.Classroom;
 import Entities.Competency;
+import Enums.RoomDestination;
 
 public class CompetencyRepository extends GenericRepository<Competency> {
 
@@ -13,8 +16,19 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 
 	@Override
 	protected Competency resultToObject(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Competency cm = null;
+		try {
+			if(!rs.next()) return null;
+			int id = rs.getInt("id");
+			int teacherId = rs.getInt("teacherId");
+			String name = rs.getString("name");
+			cm = new Competency(id, teacherId, name);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cm;
 	}
 
 

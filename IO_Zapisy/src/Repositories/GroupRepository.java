@@ -1,9 +1,15 @@
 package Repositories;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
 
 import AppStart.DatabaseConnector;
+import Entities.Classroom;
+import Entities.Course;
+import Entities.Enrollment;
 import Entities.Group;
+import Entities.PersonalData;
 
 public class GroupRepository extends GenericRepository<Group> {
 
@@ -13,8 +19,27 @@ public class GroupRepository extends GenericRepository<Group> {
 
 	@Override
 	protected Group resultToObject(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Group gr = null;
+		try {
+			if(!rs.next()) return null;
+			int id = rs.getInt("id");
+			int teacherId = rs.getInt("teacherId");
+			PersonalData pd = RepositoryFactorySingleton.getInstance().getRepository(PersonalDataRepository.class).getById(teacherId);
+			Time time = rs.getTime("time_hour");
+			int day = rs.getInt("day");
+			int courseId = rs.getInt("courseId");
+			Course co = RepositoryFactorySingleton.getInstance().getRepository(CourseRepository.class).getById(courseId);
+			
+			int classroomId = rs.getInt("classroomId");
+			Classroom cl = RepositoryFactorySingleton.getInstance().getRepository(ClassroomRepository.class).getById(classroomId);
+			
+			gr = new Group(id, pd, time, day, co, cl);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return gr;
 	}
 
 

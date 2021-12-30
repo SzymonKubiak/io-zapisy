@@ -1,10 +1,14 @@
 package Repositories;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import AppStart.DatabaseConnector;
 import Entities.AbstractEntity;
+import Entities.Competency;
 import Entities.Enrollment;
+import Entities.Group;
+import Entities.PersonalData;
 
 public class EnrollmentRepository extends GenericRepository<Enrollment> {
 
@@ -14,8 +18,21 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 
 	@Override
 	protected Enrollment resultToObject(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Enrollment en = null;
+		try {
+			if(!rs.next()) return null;
+			int id = rs.getInt("id");
+			int studentId = rs.getInt("studentId");
+			PersonalData pd = RepositoryFactorySingleton.getInstance().getRepository(PersonalDataRepository.class).getById(studentId);
+			int groupId =  rs.getInt("groupId");
+			Group gr = RepositoryFactorySingleton.getInstance().getRepository(GroupRepository.class).getById(groupId);
+			en = new Enrollment(id, pd, gr);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return en;
 	}
 
 
