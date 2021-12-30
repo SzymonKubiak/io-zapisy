@@ -29,7 +29,8 @@ public abstract class GenericRepository <EntityType extends AbstractEntity> {
 	}
 	
 	protected abstract EntityType resultToObject(ResultSet rs);
-	protected abstract String objectToQuery();
+	protected abstract String objectToInsertQuery(EntityType e);
+	protected abstract String objectToUpdateQuery(EntityType e);
 	protected abstract void createTable();
 	
 	public EntityType getById(int id) {

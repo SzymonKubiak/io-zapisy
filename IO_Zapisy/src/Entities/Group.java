@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class Group extends AbstractEntity{
 
-	private PersonalData teacher;
-	private Time time;
-	private int day;
-	private Course course;
-	private Classroom classroom;
+	public PersonalData teacher;
+	public Time time;
+	public int day;
+	public Course course;
+	public Classroom classroom;
 	public Group(int id, PersonalData teacher, Time time, int day, Course course, Classroom classroom) {
 		super(id);
 		this.teacher = teacher;

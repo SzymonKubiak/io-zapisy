@@ -2,8 +2,8 @@ package Entities;
 
 public class Enrollment extends AbstractEntity {
 
-	private PersonalData student;
-	private Group group;
+	public PersonalData student;
+	public Group group;
 	public Enrollment(int id, PersonalData student, Group group) {
 		super(id);
 		this.student = student;

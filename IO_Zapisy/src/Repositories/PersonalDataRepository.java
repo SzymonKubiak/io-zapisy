@@ -42,9 +42,35 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	}
 
 	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String objectToUpdateQuery(PersonalData e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE PersonalData SET ")
+	            .append("name = "+ e.name + ", ")
+	            .append("surname = "+e.surname + ", ")
+	            .append("pesel = "+e.PESEL + ", ")
+	            .append("address = "+ e.address + ", ")
+	            .append("phoneNumber = " + e.phoneNumber + ", ")
+	            .append("accountId = " + e.account.id)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
+	}
+	
+	@Override
+	protected String objectToInsertQuery(PersonalData e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO PersonalData VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.name + ", ")
+	            .append(e.surname + ", ")
+	            .append(e.PESEL + ", ")
+	            .append(e.address + ", ")
+	            .append(e.phoneNumber + ", ")
+	            .append(e.account.id)
+	            .append(");");
+
+		return sb.toString();	
 	}
 
 	@Override

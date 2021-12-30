@@ -17,11 +17,6 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 		return null;
 	}
 
-	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected void createTable() {
@@ -36,6 +31,29 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 		String query = sb.toString();	
 		DatabaseConnector.executeUpdate(query);
 		
+	}
+
+	@Override
+	protected String objectToInsertQuery(Competency e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO Competencies VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.teacherId)
+	            .append(");");
+
+		return sb.toString();	
+	}
+
+	@Override
+	protected String objectToUpdateQuery(Competency e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE Competencies SET ")
+	            .append("name = "+ e.name + ", ")
+	            .append("teacherId = "+e.teacherId)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
 	}
 
 }

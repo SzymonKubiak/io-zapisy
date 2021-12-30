@@ -18,11 +18,6 @@ public class CourseRepository extends GenericRepository<Course> {
 		return null;
 	}
 
-	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected void createTable() {
@@ -38,6 +33,32 @@ public class CourseRepository extends GenericRepository<Course> {
 		String query = sb.toString();	
 		DatabaseConnector.executeUpdate(query);
 		
+	}
+
+	@Override
+	protected String objectToInsertQuery(Course e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO Course VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.requiredRoom + ", ")
+	            .append(e.title + ", ")
+	            .append(e.description)
+	            .append(");");
+
+		return sb.toString();
+	}
+
+	@Override
+	protected String objectToUpdateQuery(Course e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE Course SET ")
+	            .append("requiredRoom = "+ e.requiredRoom + ", ")
+	            .append("title = "+e.title + ", ")
+	            .append("description = "+e.description)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
 	}
 
 }

@@ -32,11 +32,6 @@ public class AccountRepository extends GenericRepository<Account> {
 		return ac;
 	}
 
-	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected void createTable() {
@@ -51,6 +46,30 @@ public class AccountRepository extends GenericRepository<Account> {
 		String query = sb.toString();	
 		DatabaseConnector.executeUpdate(query);
 		
+	}
+
+	@Override
+	protected String objectToInsertQuery(Account e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO Account VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.login + ", ")
+	            .append(e.password)
+	            .append(");");
+
+		return sb.toString();
+	}
+
+	@Override
+	protected String objectToUpdateQuery(Account e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE Account SET ")
+	            .append("login = "+ e.login + ", ")
+	            .append("password = "+e.password)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
 	}
 	
 }

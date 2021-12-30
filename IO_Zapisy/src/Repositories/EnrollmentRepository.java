@@ -18,11 +18,6 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 		return null;
 	}
 
-	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected void createTable() {
@@ -38,6 +33,30 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 		DatabaseConnector.executeUpdate(query);
 		
 
+	}
+
+	@Override
+	protected String objectToInsertQuery(Enrollment e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO Enrollment VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.student.id + ", ")
+	            .append(e.group.id)
+	            .append(");");
+
+		return sb.toString();
+	}
+
+	@Override
+	protected String objectToUpdateQuery(Enrollment e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE Enrollment SET ")
+	            .append("studentId = "+ e.student.id + ", ")
+	            .append("groupId = "+e.group.id)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
 	}
 
 }

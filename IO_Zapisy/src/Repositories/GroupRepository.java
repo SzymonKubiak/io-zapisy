@@ -17,11 +17,6 @@ public class GroupRepository extends GenericRepository<Group> {
 		return null;
 	}
 
-	@Override
-	protected String objectToQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected void createTable() {
@@ -40,6 +35,36 @@ public class GroupRepository extends GenericRepository<Group> {
 		DatabaseConnector.executeUpdate(query);
 		
 		
+	}
+
+	@Override
+	protected String objectToInsertQuery(Group e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("INSERT INTO course_group VALUES (")
+	            .append(e.id + ", ")
+	            .append(e.time + ", ")
+	            .append(e.day + ", ")
+	            .append(e.course.id + ", ")
+	            .append(e.classroom.id + ", ")
+	            .append(e.teacher.id)
+	            .append(");");
+
+		return sb.toString();	
+	}
+
+	@Override
+	protected String objectToUpdateQuery(Group e) {
+		StringBuilder sb = new StringBuilder()
+	            .append("UPDATE course_group SET ")
+	            .append("time_hour = "+ e.time + ", ")
+	            .append("day = "+e.day + ", ")
+	            .append("courseId = "+e.course.id + ", ")
+	            .append("classroomId = "+ e.classroom.id + ", ")
+	            .append("teacherId = " + e.teacher.id)
+	            .append("WHERE id = "+ e.id)
+	            .append(";");
+
+		return sb.toString();
 	}
 
 }
