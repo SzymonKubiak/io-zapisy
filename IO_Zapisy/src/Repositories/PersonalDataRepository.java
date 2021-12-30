@@ -60,8 +60,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	@Override
 	protected String objectToInsertQuery(PersonalData e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO PersonalData VALUES (")
-	            .append(e.id + ", ")
+	            .append("INSERT INTO PersonalData (name, surname, pesel, address, phoneNumber, accountId) VALUES (")
 	            .append(e.name + ", ")
 	            .append(e.surname + ", ")
 	            .append(e.PESEL + ", ")
@@ -78,7 +77,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS PersonalData;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS PersonalData (")
-	            .append("id int,")
+	            .append("id int AUTOINCREMENT PRIMARY KEY,")
 	            .append("name varchar(50),")
 	            .append("surname varchar(50),")
 	            .append("PESEL varchar(15),")

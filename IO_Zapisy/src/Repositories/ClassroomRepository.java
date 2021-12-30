@@ -39,7 +39,7 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS  Classroom;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Classroom (")
-	            .append("id int,")
+	            .append("id int AUTOINCREMENT PRIMARY KEY,")
 	            .append("destination int,")
 	            .append("building varchar(50),")
 	            .append("roomId varchar(50)")
@@ -53,8 +53,7 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	@Override
 	protected String objectToInsertQuery(Classroom e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Classroom VALUES (")
-	            .append(e.id + ", ")
+	            .append("INSERT INTO Classroom (destination, building, roomId) VALUES (")
 	            .append(e.destination + ", ")
 	            .append(e.building + ", ")
 	            .append(e.roomId)

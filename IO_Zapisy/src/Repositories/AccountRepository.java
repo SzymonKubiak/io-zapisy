@@ -38,7 +38,7 @@ public class AccountRepository extends GenericRepository<Account> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Account;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Account (")
-	            .append("id int,")
+	            .append("id int AUTOINCREMENT PRIMARY KEY,")
 	            .append("login varchar(50),")
 	            .append("password varchar(50)")
 	            .append(");");
@@ -51,8 +51,7 @@ public class AccountRepository extends GenericRepository<Account> {
 	@Override
 	protected String objectToInsertQuery(Account e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Account VALUES (")
-	            .append(e.id + ", ")
+	            .append("INSERT INTO Account (login, password) VALUES (")
 	            .append(e.login + ", ")
 	            .append(e.password)
 	            .append(");");

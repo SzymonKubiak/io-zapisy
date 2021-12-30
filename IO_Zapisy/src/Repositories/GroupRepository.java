@@ -48,7 +48,7 @@ public class GroupRepository extends GenericRepository<Group> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS course_group;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS course_group (")
-	            .append("id int,")
+	            .append("id int AUTOINCREMENT PRIMARY KEY,")
 	            .append("time_hour time,")
 	            .append("day int,")
 	            .append("courseId int,")
@@ -65,8 +65,7 @@ public class GroupRepository extends GenericRepository<Group> {
 	@Override
 	protected String objectToInsertQuery(Group e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO course_group VALUES (")
-	            .append(e.id + ", ")
+	            .append("INSERT INTO course_group (time, day, courseId, ClassroomId, teacherId) VALUES (")
 	            .append(e.time + ", ")
 	            .append(e.day + ", ")
 	            .append(e.course.id + ", ")

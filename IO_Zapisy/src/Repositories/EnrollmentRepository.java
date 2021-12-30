@@ -41,7 +41,7 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Enrollment;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Enrollment (")
-	            .append("id int,")
+	            .append("id int AUTOINCREMENT PRIMARY KEY,")
 	            .append("studentId int,")
 	            .append("groupId int")
 	            .append(");");
@@ -55,8 +55,7 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 	@Override
 	protected String objectToInsertQuery(Enrollment e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Enrollment VALUES (")
-	            .append(e.id + ", ")
+	            .append("INSERT INTO Enrollment (studentId, groupId) VALUES (")
 	            .append(e.student.id + ", ")
 	            .append(e.group.id)
 	            .append(");");
