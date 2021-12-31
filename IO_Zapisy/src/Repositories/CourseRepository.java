@@ -39,7 +39,7 @@ public class CourseRepository extends GenericRepository<Course> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Course;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Course (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("requiredRoom int,")
 	            .append("title varchar(50),")
 	            .append("description varchar(50)")
@@ -54,9 +54,9 @@ public class CourseRepository extends GenericRepository<Course> {
 	protected String objectToInsertQuery(Course e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO Course (requiredRoom, title, description) VALUES (")
-	            .append(e.requiredRoom + ", ")
-	            .append(e.title + ", ")
-	            .append(e.description)
+	            .append("\"" + e.requiredRoom.ordinal() + "\", ")
+	            .append("\"" + e.title+ "\", ")
+	            .append("\"" + e.description+ "\"")
 	            .append(");");
 
 		return sb.toString();
@@ -66,9 +66,9 @@ public class CourseRepository extends GenericRepository<Course> {
 	protected String objectToUpdateQuery(Course e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE Course SET ")
-	            .append("requiredRoom = "+ e.requiredRoom + ", ")
-	            .append("title = "+e.title + ", ")
-	            .append("description = "+e.description)
+	            .append("requiredRoom = \""+ e.requiredRoom.ordinal() + "\", ")
+	            .append("title = \""+e.title + "\", ")
+	            .append("description = \""+e.description+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

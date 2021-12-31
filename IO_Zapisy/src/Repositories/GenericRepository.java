@@ -35,10 +35,13 @@ public abstract class GenericRepository <EntityType extends AbstractEntity> {
 	
 	public EntityType getById(int id) {
 		ResultSet rs = DatabaseConnector.executeQuery("SELECT * FROM " +tableName + " WHERE id =" + id);
+		try {
+			if(!rs.next()) return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return this.resultToObject(rs);
-		/*
-		Optional<EntityType> result = this.list.stream().filter(item -> item.id == id).findFirst();
-		return result.isPresent() ? result.get() : null;*/
 	}
 	
 	public List<EntityType> getAll() {
@@ -58,19 +61,20 @@ public abstract class GenericRepository <EntityType extends AbstractEntity> {
 	}
 	
 	public EntityType create(EntityType entity) {
-		if(entity.id == 0) entity.id = indexCount++;
-		return list.add(entity) ? entity : null;
-	}
-	
-	public EntityType update(EntityType entity) {
-		this.list = this.list.stream().filter(item -> item.id != entity.id).toList();
-		this.list.add(entity);
+		String query = this.objectToInsertQuery(entity);
+		entity.id = DatabaseConnector.executeInsert(query);
 		return entity;
 	}
 	
+	public EntityType update(EntityType entity) {
+		String query = this.objectToUpdateQuery(entity);
+		int updatedRecords = DatabaseConnector.executeUpdate(query);
+		return updatedRecords > 0 ? entity : null;
+	}
+	
 	public boolean delete(EntityType entity) {
-		this.list = this.list.stream().filter(item -> item.id != entity.id).toList();
-		return true;
+		int deleted = DatabaseConnector.executeUpdate("DELETE FROM " +tableName + " WHERE id = "+ entity.id);
+		return deleted > 0;
 	}
 	
 	public List<EntityType> findByFieldValue(String fieldName, Object value) {

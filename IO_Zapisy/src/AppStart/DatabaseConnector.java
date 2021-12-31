@@ -3,6 +3,7 @@ package AppStart;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -60,5 +61,20 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 		return res;
+	}
+	public static int executeInsert(String query) {
+		Connection con = DatabaseConnector.connect();
+		int generatedKey = 0;
+		try {
+			PreparedStatement prepared = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			prepared.execute();
+			ResultSet rs = prepared.getGeneratedKeys();
+			if (rs.next()) {
+			    generatedKey = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return generatedKey;
 	}
 }

@@ -39,7 +39,7 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS  Classroom;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Classroom (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("destination int,")
 	            .append("building varchar(50),")
 	            .append("roomId varchar(50)")
@@ -54,9 +54,9 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	protected String objectToInsertQuery(Classroom e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO Classroom (destination, building, roomId) VALUES (")
-	            .append(e.destination + ", ")
-	            .append(e.building + ", ")
-	            .append(e.roomId)
+	            .append("\"" + e.destination.ordinal() + "\", ")
+	            .append("\"" + e.building + "\", ")
+	            .append("\"" + e.roomId+ "\"")
 	            .append(");");
 
 		return sb.toString();	
@@ -66,9 +66,9 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	protected String objectToUpdateQuery(Classroom e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE Classroom SET ")
-	            .append("destination = "+ e.destination + ", ")
-	            .append("building = "+e.building + ", ")
-	            .append("roomId = "+e.roomId)
+	            .append("destination = \""+ e.destination.ordinal() + "\", ")
+	            .append("building = \""+e.building + "\", ")
+	            .append("roomId = \""+e.roomId+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

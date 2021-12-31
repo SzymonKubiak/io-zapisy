@@ -48,7 +48,7 @@ public class GroupRepository extends GenericRepository<Group> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS course_group;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS course_group (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("time_hour time,")
 	            .append("day int,")
 	            .append("courseId int,")
@@ -66,11 +66,11 @@ public class GroupRepository extends GenericRepository<Group> {
 	protected String objectToInsertQuery(Group e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO course_group (time, day, courseId, ClassroomId, teacherId) VALUES (")
-	            .append(e.time + ", ")
-	            .append(e.day + ", ")
-	            .append(e.course.id + ", ")
-	            .append(e.classroom.id + ", ")
-	            .append(e.teacher.id)
+	            .append("\"" + e.time + "\", ")
+	            .append("\"" + e.day + "\", ")
+	            .append("\"" + e.course.id + "\", ")
+	            .append("\"" + e.classroom.id + "\", ")
+	            .append("\"" + e.teacher.id+ "\"")
 	            .append(");");
 
 		return sb.toString();	
@@ -80,11 +80,11 @@ public class GroupRepository extends GenericRepository<Group> {
 	protected String objectToUpdateQuery(Group e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE course_group SET ")
-	            .append("time_hour = "+ e.time + ", ")
-	            .append("day = "+e.day + ", ")
-	            .append("courseId = "+e.course.id + ", ")
-	            .append("classroomId = "+ e.classroom.id + ", ")
-	            .append("teacherId = " + e.teacher.id)
+	            .append("time_hour = \""+ e.time + "\", ")
+	            .append("day = \""+e.day + "\", ")
+	            .append("courseId = \""+e.course.id + "\", ")
+	            .append("classroomId = \""+ e.classroom.id + "\", ")
+	            .append("teacherId = \"" + e.teacher.id+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

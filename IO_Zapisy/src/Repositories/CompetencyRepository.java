@@ -34,10 +34,10 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 
 	@Override
 	protected void createTable() {
-		DatabaseConnector.executeUpdate("DROP TABLE Competency;");
+		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Competency;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Competency (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("teacherId int,")
 	            .append("name varchar(50)")
 	            .append(");");
@@ -50,9 +50,9 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 	@Override
 	protected String objectToInsertQuery(Competency e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Competencies (name, teacherId) VALUES (")
-	            .append(e.name + ", ")
-	            .append(e.teacherId)
+	            .append("INSERT INTO Competency (name, teacherId) VALUES (")
+	            .append("\"" +e.name + "\", ")
+	            .append("\"" +e.teacherId+ "\"")
 	            .append(");");
 
 		return sb.toString();	
@@ -61,7 +61,7 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 	@Override
 	protected String objectToUpdateQuery(Competency e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("UPDATE Competencies SET ")
+	            .append("UPDATE Competency SET ")
 	            .append("name = "+ e.name + ", ")
 	            .append("teacherId = "+e.teacherId)
 	            .append("WHERE id = "+ e.id)

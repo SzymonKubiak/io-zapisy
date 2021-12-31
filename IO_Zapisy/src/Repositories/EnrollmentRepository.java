@@ -41,7 +41,7 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Enrollment;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Enrollment (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("studentId int,")
 	            .append("groupId int")
 	            .append(");");
@@ -56,8 +56,8 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 	protected String objectToInsertQuery(Enrollment e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO Enrollment (studentId, groupId) VALUES (")
-	            .append(e.student.id + ", ")
-	            .append(e.group.id)
+	            .append("\"" + e.student.id  + "\", ")
+	            .append("\"" + e.group.id+ "\"")
 	            .append(");");
 
 		return sb.toString();
@@ -67,8 +67,8 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 	protected String objectToUpdateQuery(Enrollment e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE Enrollment SET ")
-	            .append("studentId = "+ e.student.id + ", ")
-	            .append("groupId = "+e.group.id)
+	            .append("studentId = \""+ e.student.id + "\", ")
+	            .append("groupId = \""+e.group.id+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

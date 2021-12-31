@@ -19,7 +19,6 @@ public class AccountRepository extends GenericRepository<Account> {
 		
 		Account ac = null;
 		try {
-			if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			String login = rs.getString("login");
 			String password = rs.getString("password");
@@ -38,7 +37,7 @@ public class AccountRepository extends GenericRepository<Account> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS Account;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS Account (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("login varchar(50),")
 	            .append("password varchar(50)")
 	            .append(");");
@@ -52,8 +51,8 @@ public class AccountRepository extends GenericRepository<Account> {
 	protected String objectToInsertQuery(Account e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO Account (login, password) VALUES (")
-	            .append(e.login + ", ")
-	            .append(e.password)
+	            .append("\"" + e.login + "\", ")
+	            .append("\"" +e.password+ "\"")
 	            .append(");");
 
 		return sb.toString();
@@ -63,8 +62,8 @@ public class AccountRepository extends GenericRepository<Account> {
 	protected String objectToUpdateQuery(Account e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE Account SET ")
-	            .append("login = "+ e.login + ", ")
-	            .append("password = "+e.password)
+	            .append("login = \""+ e.login +"\", ")
+	            .append("password = \""+e.password+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

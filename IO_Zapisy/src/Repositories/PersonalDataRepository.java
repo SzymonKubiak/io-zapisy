@@ -45,12 +45,12 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	protected String objectToUpdateQuery(PersonalData e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE PersonalData SET ")
-	            .append("name = "+ e.name + ", ")
-	            .append("surname = "+e.surname + ", ")
-	            .append("pesel = "+e.PESEL + ", ")
-	            .append("address = "+ e.address + ", ")
-	            .append("phoneNumber = " + e.phoneNumber + ", ")
-	            .append("accountId = " + e.account.id)
+	            .append("name = \""+ e.name + "\", ")
+	            .append("surname = \""+e.surname + "\", ")
+	            .append("pesel = \""+e.PESEL + "\", ")
+	            .append("address = \""+ e.address + "\", ")
+	            .append("phoneNumber = \"" + e.phoneNumber + "\", ")
+	            .append("accountId = \"" + e.account.id+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 
@@ -61,11 +61,11 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	protected String objectToInsertQuery(PersonalData e) {
 		StringBuilder sb = new StringBuilder()
 	            .append("INSERT INTO PersonalData (name, surname, pesel, address, phoneNumber, accountId) VALUES (")
-	            .append(e.name + ", ")
-	            .append(e.surname + ", ")
-	            .append(e.PESEL + ", ")
-	            .append(e.address + ", ")
-	            .append(e.phoneNumber + ", ")
+	            .append("\"" + e.name + "\", ")
+	            .append("\"" + e.surname+ "\", ")
+	            .append("\"" + e.PESEL+ "\", ")
+	            .append("\"" + e.address+ "\", ")
+	            .append("\"" + e.phoneNumber + "\", ")
 	            .append(e.account.id)
 	            .append(");");
 
@@ -77,7 +77,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 		DatabaseConnector.executeUpdate("DROP TABLE IF EXISTS PersonalData;");
 		StringBuilder sb = new StringBuilder()
 	            .append("CREATE TABLE IF NOT EXISTS PersonalData (")
-	            .append("id int AUTOINCREMENT PRIMARY KEY,")
+	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("name varchar(50),")
 	            .append("surname varchar(50),")
 	            .append("PESEL varchar(15),")
