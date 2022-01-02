@@ -4,6 +4,7 @@ import Entities.Account;
 import Entities.PersonalData;
 import Factories.PersonFactory;
 import Repositories.RepositoryFactory;
+import Repositories.RepositoryFactorySingleton;
 
 public class Facade {
 	
@@ -13,15 +14,12 @@ public class Facade {
 
 	public PersonalData createStudent(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address) {
 		
-		Account account = null;//new Account(login, password);
-		PersonalData pd = null;//new PersonalData(name, surname, PESEL, address, phoneNumber, account);
-		return personFactory.createStudent(pd);
-		
+		return personFactory.createPerson(login, password, name, surname, PESEL, dateOfBirth, phoneNumber, address);
 	}
 	
-	public Facade(RepositoryFactory repositoryFactory) {
-		this.repositoryFactory = repositoryFactory;
-		this.personFactory = new PersonFactory(repositoryFactory);
+	public Facade() {
+		this.repositoryFactory = RepositoryFactorySingleton.getInstance();
+		this.personFactory = new PersonFactory();
 		
 	}
 	
