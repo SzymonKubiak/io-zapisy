@@ -37,6 +37,9 @@ public class PersonFactory {
 		return personalData;
 	}
 	
+	public PersonalData getPersonById(int id) {
+		return personalDataRepository.getById(id);
+	}
 	
 	
 	public PersonFactory() {
