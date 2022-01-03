@@ -17,9 +17,9 @@ public class Facade {
 	EnrollmentService enrollmentService;
 	
 
-	public PersonalData createStudent(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address) {
+	public PersonalData createStudent(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address, int yearOfStudy, String educationSubject) {
 		
-		return personFactory.createPerson(login, password, name, surname, PESEL, dateOfBirth, phoneNumber, address);
+		return personFactory.createPerson(login, password, name, surname, PESEL, dateOfBirth, phoneNumber, address, yearOfStudy,educationSubject);
 	}
 	
 	public Enrollment enrollStudentToGroup(int studentId, int groupId) {

@@ -15,7 +15,7 @@ public class PersonFactory {
 	AccountRepository accountRepository;
 	PersonalDataRepository personalDataRepository;
 
-	public PersonalData createPerson(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address) {
+	public PersonalData createPerson(String login, String password, String name, String surname, String PESEL, String dateOfBirth, String phoneNumber, String address, int yearOfStudy, String educationSubject) {
 		
 		// check if login and pesel is unique
 		List<Account> accounts = accountRepository.getAll();
@@ -29,7 +29,7 @@ public class PersonFactory {
 		if(loginAlreadyExists || peselAlreadyExists) return null;
 		
 		Account account = new Account(0, login, password);
-		PersonalData personalData = new PersonalData(0, name, surname, PESEL, address, phoneNumber, account, null);
+		PersonalData personalData = new PersonalData(0, name, surname, PESEL, address, phoneNumber, account,yearOfStudy,educationSubject, null);
 		
 		account = accountRepository.create(account);
 		personalData = personalDataRepository.create(personalData);

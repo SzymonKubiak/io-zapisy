@@ -29,10 +29,12 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 			String pesel = rs.getString("pesel");
 			String address = rs.getString("address");
 			String phoneNumber = rs.getString("phoneNumber");
+			int yearOfStudy = rs.getInt("yearOfStudy");
+			String educationSubject = rs.getString("educationSubject");
 			Account account = RepositoryFactorySingleton.getInstance().getRepository(AccountRepository.class).getById(accountId);
 			List<Competency> list = RepositoryFactorySingleton.getInstance().getRepository(CompetencyRepository.class).getAll();
 			list = list.stream().filter(c-> c.teacherId == id).toList();
-			pd = new PersonalData(id, name, surname, pesel, address, phoneNumber, account, list);
+			pd = new PersonalData(id, name, surname, pesel, address, phoneNumber, account, yearOfStudy, educationSubject, list);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -50,6 +52,8 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	            .append("pesel = \""+e.PESEL + "\", ")
 	            .append("address = \""+ e.address + "\", ")
 	            .append("phoneNumber = \"" + e.phoneNumber + "\", ")
+	            .append("yearOfStudy = \""+e.yearOfStudy + "\", ")
+	            .append("educationSubject = \""+e.educationSubject+ "\", ")
 	            .append("accountId = \"" + e.account.id+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
@@ -60,12 +64,14 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	@Override
 	protected String objectToInsertQuery(PersonalData e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO PersonalData (name, surname, pesel, address, phoneNumber, accountId) VALUES (")
+	            .append("INSERT INTO PersonalData (name, surname, pesel, address, phoneNumber, yearOfStudy, educationSubject, accountId) VALUES (")
 	            .append("\"" + e.name + "\", ")
 	            .append("\"" + e.surname+ "\", ")
 	            .append("\"" + e.PESEL+ "\", ")
 	            .append("\"" + e.address+ "\", ")
 	            .append("\"" + e.phoneNumber + "\", ")
+	            .append("\"" + e.yearOfStudy+ "\", ")
+	            .append("\"" + e.educationSubject+ "\", ")
 	            .append(e.account.id)
 	            .append(");");
 
@@ -83,7 +89,9 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	            .append("PESEL varchar(15),")
 	            .append("address varchar(255),")
 	            .append("phoneNumber varchar(15),")
-	            .append("accountId int")
+	            .append("accountId int,")
+	            .append("yearOfStudy int,")
+	            .append("educationSubject varchar(50)")
 	            .append(");");
 
 		String query = sb.toString();	

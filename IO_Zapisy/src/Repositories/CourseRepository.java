@@ -24,7 +24,9 @@ public class CourseRepository extends GenericRepository<Course> {
 			int requiredRoom = rs.getInt("requiredRoom");
 			String title = rs.getString("title");
 			String description = rs.getString("description");
-			co = new Course(id, RoomDestination.toEnum(requiredRoom), title, description);
+			int yearOfStudy = rs.getInt("yearOfStudy");
+			String educationSubject = rs.getString("educationSubject");
+			co = new Course(id, RoomDestination.toEnum(requiredRoom), title, description,yearOfStudy, educationSubject);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -42,7 +44,9 @@ public class CourseRepository extends GenericRepository<Course> {
 	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("requiredRoom int,")
 	            .append("title varchar(50),")
-	            .append("description varchar(50)")
+	            .append("description varchar(50),")
+	            .append("yearOfStudy int,")
+	            .append("educationSubject varchar(50)")
 	            .append(");");
 
 		String query = sb.toString();	
@@ -53,10 +57,12 @@ public class CourseRepository extends GenericRepository<Course> {
 	@Override
 	protected String objectToInsertQuery(Course e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Course (requiredRoom, title, description) VALUES (")
+	            .append("INSERT INTO Course (requiredRoom, title, description, yearOfStudy, educationSubject) VALUES (")
 	            .append("\"" + e.requiredRoom.ordinal() + "\", ")
 	            .append("\"" + e.title+ "\", ")
-	            .append("\"" + e.description+ "\"")
+	            .append("\"" + e.description+ "\", ")
+	            .append("\"" + e.yearOfStudy+ "\", ")
+	            .append("\"" + e.educationSubject+ "\"")
 	            .append(");");
 
 		return sb.toString();
@@ -68,7 +74,9 @@ public class CourseRepository extends GenericRepository<Course> {
 	            .append("UPDATE Course SET ")
 	            .append("requiredRoom = \""+ e.requiredRoom.ordinal() + "\", ")
 	            .append("title = \""+e.title + "\", ")
-	            .append("description = \""+e.description+ "\"")
+	            .append("description = \""+e.description + "\", ")
+	            .append("yearOfStudy = \""+e.yearOfStudy + "\", ")
+	            .append("educationSubject = \""+e.educationSubject+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

@@ -27,9 +27,9 @@ public class DatabaseCreator {
 		account2 = ar.create(account2);
 		account3 = ar.create(account3);
 		
-		PersonalData pd1 = new PersonalData(0,"Szymon", "Kubiak", "0021234252352", "Wroclaw, Fabryczna 1", "123-232-231", account1, null);
-		PersonalData pd2 = new PersonalData(0,"Grzegorz", "Litwiniuk", "00212998352", "Wroclaw, Fabryczna 4", "321-232-231", account2, null);
-		PersonalData pd3 = new PersonalData(0,"Pawel", "Rogalinski", "9421234252352", "Wroclaw, Fabryczna 8", "999-232-231", account3, null);
+		PersonalData pd1 = new PersonalData(0,"Szymon", "Kubiak", "0021234252352", "Wroclaw, Fabryczna 1", "123-232-231", account1, 3, "informatyka",  null);
+		PersonalData pd2 = new PersonalData(0,"Grzegorz", "Litwiniuk", "00212998352", "Wroclaw, Fabryczna 4", "321-232-231", account2, 3, "informatyka techniczna", null);
+		PersonalData pd3 = new PersonalData(0,"Pawel", "Rogalinski", "9421234252352", "Wroclaw, Fabryczna 8", "999-232-231", account3, 0, null, null);
 		PersonalDataRepository pdr = rf.getRepository(PersonalDataRepository.class);
 		pd1 = pdr.create(pd1);
 		pd2 = pdr.create(pd2);
