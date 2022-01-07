@@ -19,7 +19,7 @@ public class CourseRepository extends GenericRepository<Course> {
 	protected Course resultToObject(ResultSet rs) {
 		Course co = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			int requiredRoom = rs.getInt("requiredRoom");
 			String title = rs.getString("title");

@@ -20,7 +20,7 @@ public class EnrollmentRepository extends GenericRepository<Enrollment> {
 	protected Enrollment resultToObject(ResultSet rs) {
 		Enrollment en = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			int studentId = rs.getInt("studentId");
 			PersonalData pd = RepositoryFactorySingleton.getInstance().getRepository(PersonalDataRepository.class).getById(studentId);

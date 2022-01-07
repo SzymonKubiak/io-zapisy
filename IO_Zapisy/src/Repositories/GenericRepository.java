@@ -77,6 +77,10 @@ public abstract class GenericRepository <EntityType extends AbstractEntity> {
 		return deleted > 0;
 	}
 	
+	public boolean deleteAll() {
+		return DatabaseConnector.executeUpdate("DELETE FROM " +tableName) > 0;
+	}
+	
 	public List<EntityType> findByFieldValue(String fieldName, Object value) {
 		
 		if(this.list.size() == 0) {

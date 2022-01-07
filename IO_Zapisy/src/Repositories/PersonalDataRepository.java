@@ -21,7 +21,7 @@ public class PersonalDataRepository extends GenericRepository<PersonalData> {
 	protected PersonalData resultToObject(ResultSet rs) {
 		PersonalData pd = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			final int id = rs.getInt("id");
 			int accountId = rs.getInt("accountId");
 			String name = rs.getString("name");

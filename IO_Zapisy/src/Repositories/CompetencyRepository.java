@@ -18,7 +18,7 @@ public class CompetencyRepository extends GenericRepository<Competency> {
 	protected Competency resultToObject(ResultSet rs) {
 		Competency cm = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			int teacherId = rs.getInt("teacherId");
 			String name = rs.getString("name");

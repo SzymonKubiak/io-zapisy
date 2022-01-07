@@ -1,5 +1,6 @@
 package Entities;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class PersonalData extends AbstractEntity {
 		this.yearOfStudy = yearOfStudy;
 		this.educationSubject = educationSubject;
 		this.account = account;
-		this.competencies = competencies;
+		this.competencies = new LinkedList<Competency>();
 		this.competencyRepo = RepositoryFactorySingleton.getInstance().getRepository(CompetencyRepository.class);
 	}
 	
@@ -42,9 +43,10 @@ public class PersonalData extends AbstractEntity {
 		
 		final String fName = name;
 		final int fId = this.id;
+		var a =this.competencyRepo.getAll();
 		if(this.id == 0 || 
 				this.competencyRepo.getAll().stream()
-				.anyMatch(comp -> comp.teacherId == fId || comp.name == fName)) {
+				.anyMatch(comp -> comp.teacherId == fId && comp.name.equals(fName))) {
 			return null;
 		}
 		
@@ -69,6 +71,8 @@ public class PersonalData extends AbstractEntity {
 	}
 
 
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-	
 }

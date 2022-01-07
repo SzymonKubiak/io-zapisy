@@ -19,12 +19,13 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	protected Classroom resultToObject(ResultSet rs) {
 		Classroom cl = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			int destination = rs.getInt("destination");
 			String building = rs.getString("building");
 			String roomId = rs.getString("roomId");
-			cl = new Classroom(id, RoomDestination.toEnum(destination), building, roomId);
+			int capacity = rs.getInt("capacity");
+			cl = new Classroom(id, RoomDestination.toEnum(destination), building, roomId, capacity);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -42,6 +43,7 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("destination int,")
 	            .append("building varchar(50),")
+	            .append("capacity int,")
 	            .append("roomId varchar(50)")
 	            .append(");");
 
@@ -53,10 +55,12 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	@Override
 	protected String objectToInsertQuery(Classroom e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Classroom (destination, building, roomId) VALUES (")
+	            .append("INSERT INTO Classroom (destination, building, roomId, capacity) VALUES (")
 	            .append("\"" + e.destination.ordinal() + "\", ")
 	            .append("\"" + e.building + "\", ")
-	            .append("\"" + e.roomId+ "\"")
+	            .append("\"" + e.roomId + "\", ")
+	            .append("\"" + e.capacity+ "\"")
+	            
 	            .append(");");
 
 		return sb.toString();	
@@ -68,7 +72,8 @@ public class ClassroomRepository extends GenericRepository<Classroom> {
 	            .append("UPDATE Classroom SET ")
 	            .append("destination = \""+ e.destination.ordinal() + "\", ")
 	            .append("building = \""+e.building + "\", ")
-	            .append("roomId = \""+e.roomId+ "\"")
+	            .append("roomId = \""+e.roomId+ "\", ")
+	            .append("capacity = \""+e.capacity+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

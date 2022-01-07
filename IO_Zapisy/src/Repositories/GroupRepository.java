@@ -21,7 +21,7 @@ public class GroupRepository extends GenericRepository<Group> {
 	protected Group resultToObject(ResultSet rs) {
 		Group gr = null;
 		try {
-			if(!rs.next()) return null;
+			//if(!rs.next()) return null;
 			int id = rs.getInt("id");
 			int teacherId = rs.getInt("teacherId");
 			PersonalData pd = RepositoryFactorySingleton.getInstance().getRepository(PersonalDataRepository.class).getById(teacherId);
@@ -65,7 +65,7 @@ public class GroupRepository extends GenericRepository<Group> {
 	@Override
 	protected String objectToInsertQuery(Group e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO course_group (time, day, courseId, ClassroomId, teacherId) VALUES (")
+	            .append("INSERT INTO course_group (time_hour, day, courseId, ClassroomId, teacherId) VALUES (")
 	            .append("\"" + e.time + "\", ")
 	            .append("\"" + e.day + "\", ")
 	            .append("\"" + e.course.id + "\", ")
