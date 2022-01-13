@@ -28,9 +28,9 @@ public class DatabaseCreator {
 		RepositoryFactory rf = RepositoryFactorySingleton.getInstance();
 		
 		AccountRepository ar = rf.getRepository(AccountRepository.class);
-		Account account1 = new Account(0,"szymon123", "pass" );
-		Account account2 = new Account(0,"grzegorz123", "pass" );
-		Account account3 = new Account(0,"pawel123", "pass" );
+		Account account1 = new Account(0,"szymon123", "pass", "user" );
+		Account account2 = new Account(0,"grzegorz123", "pass","user" );
+		Account account3 = new Account(0,"pawel123", "pass","user" );
 		account1 = ar.create(account1);
 		account2 = ar.create(account2);
 		account3 = ar.create(account3);

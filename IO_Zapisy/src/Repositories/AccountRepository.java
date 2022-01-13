@@ -22,7 +22,8 @@ public class AccountRepository extends GenericRepository<Account> {
 			int id = rs.getInt("id");
 			String login = rs.getString("login");
 			String password = rs.getString("password");
-			ac = new Account(id, login, password);
+			String role = rs.getString("role");
+			ac = new Account(id, login, password, role);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -39,6 +40,7 @@ public class AccountRepository extends GenericRepository<Account> {
 	            .append("CREATE TABLE IF NOT EXISTS Account (")
 	            .append("id int AUTO_INCREMENT PRIMARY KEY,")
 	            .append("login varchar(50),")
+	            .append("role varchar(50),")
 	            .append("password varchar(50)")
 	            .append(");");
 
@@ -50,9 +52,10 @@ public class AccountRepository extends GenericRepository<Account> {
 	@Override
 	protected String objectToInsertQuery(Account e) {
 		StringBuilder sb = new StringBuilder()
-	            .append("INSERT INTO Account (login, password) VALUES (")
+	            .append("INSERT INTO Account (login, password, role) VALUES (")
 	            .append("\"" + e.login + "\", ")
-	            .append("\"" +e.password+ "\"")
+	            .append("\"" + e.password + "\", ")
+	            .append("\"" +e.role+ "\"")
 	            .append(");");
 
 		return sb.toString();
@@ -63,7 +66,8 @@ public class AccountRepository extends GenericRepository<Account> {
 		StringBuilder sb = new StringBuilder()
 	            .append("UPDATE Account SET ")
 	            .append("login = \""+ e.login +"\", ")
-	            .append("password = \""+e.password+ "\"")
+	            .append("password = \""+ e.password +"\", ")
+	            .append("role = \""+e.role+ "\"")
 	            .append("WHERE id = "+ e.id)
 	            .append(";");
 

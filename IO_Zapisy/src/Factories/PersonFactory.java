@@ -21,6 +21,9 @@ public class PersonFactory{
 		 String phoneNumber, String address, int yearOfStudy, String educationSubject,
 			String[] competencies) {
 
+		// data validation
+		if(PESEL.length() != 13 || password.length() < 8) throw new IllegalArgumentException();
+		
 		// check if login and pesel is unique
 		List<Account> accounts = accountRepository.getAll();
 		final String finalLogin = login;
@@ -33,7 +36,7 @@ public class PersonFactory{
 		if (loginAlreadyExists || peselAlreadyExists)
 			return null;
 
-		Account account = new Account(0, login, password);
+		Account account = new Account(0, login, password, "user");
 		PersonalData personalData = new PersonalData(0, name, surname, PESEL, address, phoneNumber, account,
 				yearOfStudy, educationSubject, null);
 

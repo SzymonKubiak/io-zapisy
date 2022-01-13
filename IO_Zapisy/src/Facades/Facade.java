@@ -7,6 +7,7 @@ import Entities.PersonalData;
 import Factories.PersonFactory;
 import Repositories.EnrollmentRepository;
 import Repositories.GroupRepository;
+import Repositories.PersonalDataRepository;
 import Repositories.RepositoryFactory;
 import Repositories.RepositoryFactorySingleton;
 
@@ -47,20 +48,10 @@ public class Facade {
 		return enrollment;
 	}
 	
-	public boolean editPhoneNumber(int personalDataId, String newNumber) {
-
-		PersonalData pd = personFactory.getPersonById(personalDataId);
-		if (pd != null) {
-			pd.setPhoneNumber(newNumber);
-			return true;
-		}
-
-		return false;
+	public PersonalData editPersonalData(PersonalData p) {
+		var personalRepo = this.repositoryFactory.getRepository(PersonalDataRepository.class);
+		return personalRepo.update(p);
 	}
-
-	
-	
-	
 	
 	
 	public Facade() {

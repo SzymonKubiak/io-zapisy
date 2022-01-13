@@ -1,15 +1,23 @@
-package Entities;
+package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
+
+import Entities.*;
 import Factories.PersonFactory;
 import Repositories.AccountRepository;
 import Repositories.CompetencyRepository;
 import Repositories.PersonalDataRepository;
 import Repositories.RepositoryFactorySingleton;
 
+@Category(TestEntity.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class PersonalDataTest {
 
 	PersonalDataRepository pdRepo = RepositoryFactorySingleton.getInstance()
@@ -20,17 +28,25 @@ class PersonalDataTest {
 			.getRepository(AccountRepository.class);
 	PersonFactory personFactory = new PersonFactory();
 
-	
+	static TestData testData;
+
+	@BeforeAll
+	public static void initData() {
+		testData = new TestData();
+	}
 	
 	@Test
 	void testAddCompetency() {
 		
-		PersonalData pd1 = personFactory.createTeacher("login", "pass", "name", "surname", "1222", "123", "wroclaw",
-				null);
+		int dataIndex = 0;
+		PersonalData pd1 = personFactory.createTeacher(testData.login[dataIndex], testData.password[dataIndex],
+				testData.name[dataIndex], testData.surname[dataIndex], testData.pesel[dataIndex],
+				testData.phone[dataIndex], testData.address[dataIndex], null);
+		
 		assertEquals(0, pd1.competencies.size(), 
 				"Teacher created with no competencies should have 0");
 
-		String[] competencies = { "IO", "AK2", "BD2" };
+		String[] competencies = {testData.competencies[0],testData.competencies[1],testData.competencies[2]};
 		
 		for (String comp : competencies) {
 			pd1.addCompetency(comp);
@@ -38,13 +54,13 @@ class PersonalDataTest {
 		assertEquals(3, pd1.competencies.size(), 
 				"After adding 3 competencies, teacher should have all of them");
 		
-		String repeatedCompetency = "IO";
+		String repeatedCompetency = testData.competencies[0];
 		pd1.addCompetency(repeatedCompetency);
 		
 		assertEquals(3, pd1.competencies.size(), 
 				"Should not add competency with the same name to the same teacher");
 		
-		cleanTablesAfterTest();
+		TestData.cleanTablesAfterTest();
 	}
 
 	@Test
@@ -63,17 +79,19 @@ class PersonalDataTest {
 		pd1.removeCompetency(c2);
 		assertEquals(0, pd1.competencies.size());
 		
-		cleanTablesAfterTest();
+		TestData.cleanTablesAfterTest();
 	}
 	
 	
 	
 	private PersonalData createPersonAndAssignCompetencies() {
 		
-		PersonalData pd1 = personFactory.createTeacher("login", "pass", "name", "surname", "1222", "123", "wroclaw",
-				null);
+		int dataIndex = 0;
+		PersonalData pd1 = personFactory.createTeacher(testData.login[dataIndex], testData.password[dataIndex],
+				testData.name[dataIndex], testData.surname[dataIndex], testData.pesel[dataIndex],
+				testData.phone[dataIndex], testData.address[dataIndex], null);
 		
-		String[] competencies = { "IO", "AK2", "BD2" };
+		String[] competencies = {testData.competencies[0],testData.competencies[1],testData.competencies[2]};
 		
 		for (String comp : competencies) {
 			pd1.addCompetency(comp);
@@ -82,10 +100,5 @@ class PersonalDataTest {
 		return pd1;
 	}
 	
-	private void cleanTablesAfterTest() {
-		pdRepo.deleteAll();
-		acRepo.deleteAll();
-		coRepo.deleteAll();
-	}
 
 }
